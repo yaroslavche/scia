@@ -11,18 +11,20 @@ class DIContainer final : public QObject
     Q_OBJECT
 
 public:
-    explicit DIContainer(QObject *parent = nullptr);
+    explicit DIContainer(const QString &projectName, QObject *parent = nullptr);
     ~DIContainer() override;
     DIContainer(const DIContainer &) = delete;
     DIContainer &operator=(const DIContainer &) = delete;
 
-    [[nodiscard]] ILogger *getCompositeLogger() const;
+    [[nodiscard]] ILogger *getCompositeLogger() const { return m_compositeLogger.get(); }
+    [[nodiscard]] QString getProjectName() const { return m_projectName; }
 
     PersonContext *getPersonContext();
 
 private:
-    [[nodiscard]] ILogger *getConsoleLogger() const;
-    [[nodiscard]] ILogger *getFileLogger() const;
+    const QString m_projectName;
+    [[nodiscard]] ILogger *getConsoleLogger() const { return m_consoleLogger.get(); }
+    [[nodiscard]] ILogger *getFileLogger() const { return m_fileLogger.get(); }
     [[nodiscard]] IDatabaseConnection *getDatabaseConnection() const;
 
     std::unique_ptr<ILogger> m_consoleLogger;

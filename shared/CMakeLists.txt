@@ -23,4 +23,4 @@ target_link_libraries(${TARGET_NAME}
         Qt6::QuickControls2
 )
 
-add_library(scia::Shared ALIAS ${TARGET_NAME})
+add_library(${PROJECT_NAME}::Shared ALIAS ${TARGET_NAME})

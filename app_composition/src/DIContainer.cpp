@@ -4,8 +4,9 @@
 #include <infrastructure/FileLogger.hpp>
 #include <infrastructure/sqlite/SqliteDatabaseInitializer.hpp>
 
-DIContainer::DIContainer(QObject *parent)
+DIContainer::DIContainer(const QString &projectName, QObject *parent)
     : QObject(parent)
+    , m_projectName(projectName)
 {
     m_consoleLogger = std::make_unique<ConsoleLogger>(LogLevel::Trace);
     m_fileLogger = std::make_unique<FileLogger>("logs/app.log", LogLevel::Trace);
@@ -15,7 +16,7 @@ DIContainer::DIContainer(QObject *parent)
     getCompositeLogger()->info("Application started");
     const auto databaseInitializer = std::make_unique<SqliteDatabaseInitializer>(
         getCompositeLogger(),
-        "scia.db",
+        QString{"%1.db"}.arg(projectName),
         QStringList{":/db/migrations/001_init.sql"},
         QStringList{":/db/fixtures/001_seed_data.sql"});
 
@@ -28,21 +29,6 @@ DIContainer::DIContainer(QObject *parent)
 DIContainer::~DIContainer()
 {
     getCompositeLogger()->info("Application closing");
-}
-
-ILogger *DIContainer::getConsoleLogger() const
-{
-    return m_consoleLogger.get();
-}
-
-ILogger *DIContainer::getFileLogger() const
-{
-    return m_fileLogger.get();
-}
-
-ILogger *DIContainer::getCompositeLogger() const
-{
-    return m_compositeLogger.get();
 }
 
 IDatabaseConnection *DIContainer::getDatabaseConnection() const

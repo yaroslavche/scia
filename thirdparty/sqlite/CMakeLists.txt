@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.20)
 
-set(TARGET_NAME scia_third_party_sqlite3)
+set(TARGET_NAME ${PROJECT_NAME}_third_party_sqlite3)
 
 add_library(${TARGET_NAME}
         STATIC
@@ -19,4 +19,4 @@ target_compile_definitions(${TARGET_NAME}
         SQLITE_ENABLE_FTS5
 )
 
-add_library(scia::Sqlite ALIAS ${TARGET_NAME})
+add_library(${PROJECT_NAME}::Sqlite ALIAS ${TARGET_NAME})

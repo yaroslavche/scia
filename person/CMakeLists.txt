@@ -18,10 +18,10 @@ target_compile_features(${TARGET_NAME} PUBLIC cxx_std_20)
 
 target_link_libraries(${TARGET_NAME}
         PRIVATE
-        scia::Shared
+        ${PROJECT_NAME}::Shared
         Qt6::Core
         Qt6::Quick
         Qt6::QuickControls2
 )
 
-add_library(scia::Person ALIAS ${TARGET_NAME})
+add_library(${PROJECT_NAME}::Person ALIAS ${TARGET_NAME})

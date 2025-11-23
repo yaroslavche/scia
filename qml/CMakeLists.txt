@@ -22,11 +22,11 @@ foreach (qml ${QML_FILES})
 endforeach ()
 
 qt_add_qml_module(${TARGET_NAME}
-        URI scia
+        URI ${PROJECT_NAME}
         VERSION 1.0
         RESOURCE_PREFIX /qt/qml
         QML_FILES ${QML_FILES}
         OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}"
 )
 
-add_library(scia::Qml ALIAS ${TARGET_NAME})
+add_library(${PROJECT_NAME}::Qml ALIAS ${TARGET_NAME})

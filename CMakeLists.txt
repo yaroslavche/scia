@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.20)
 
-project(scia VERSION 0.1 LANGUAGES C CXX)
+set(PROJECT_NAME scia)
+
+project(${PROJECT_NAME} VERSION 0.1 LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -16,7 +18,7 @@ add_subdirectory(app_composition)
 add_subdirectory(qml)
 
 qt_add_resources(app_resources resources/resources.qrc)
-set(APP_NAME scia)
+set(APP_NAME app${PROJECT_NAME})
 qt_add_executable(${APP_NAME}
         main.cpp
         ${app_resources}
@@ -28,11 +30,11 @@ qt_import_qml_plugins(${APP_NAME})
 
 target_link_libraries(${APP_NAME}
         PRIVATE
-        scia::Person
-        scia::Shared
-        scia::AppComposition
-        scia::Qml
-        scia::Sqlite
+        ${PROJECT_NAME}::Person
+        ${PROJECT_NAME}::Shared
+        ${PROJECT_NAME}::AppComposition
+        ${PROJECT_NAME}::Qml
+        ${PROJECT_NAME}::Sqlite
         Qt6::Core
         Qt6::Quick
         Qt6::QuickControls2

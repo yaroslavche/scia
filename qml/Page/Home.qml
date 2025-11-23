@@ -5,7 +5,7 @@ import QtQuick.Layouts 6.9
 Page {
     id: root
 
-    property int loadedPersons: 0
+    property int loadedPersons: personViewModel.rowCount()
 
     function randomName() {
         const names = ["John", "Jane", "Michael", "Sarah", "David", "Laura", "Chris", "Anna"];
@@ -19,10 +19,23 @@ Page {
 
     ColumnLayout {
         Button {
+            text: qsTr("Load person")
+            onClicked: () => {
+                personViewModel.load()
+                root.loadedPersons = personViewModel.rowCount()
+            }
+        }
+        Button {
             text: qsTr("Create random person")
             onClicked: () => {
                 personViewModel.createPerson(root.randomName())
                 root.loadedPersons = personViewModel.rowCount()
+            }
+        }
+        Repeater {
+            model: personViewModel
+            delegate: Text {
+                text: model.name
             }
         }
         Text {

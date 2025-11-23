@@ -26,5 +26,5 @@ private:
     std::unique_ptr<PersonViewModel> m_personViewModel;
 
     void registerQmlViewModels();
-    void registerQmlTypes() const;
+    void registerQmlTypes(const char *uri) const;
 };
