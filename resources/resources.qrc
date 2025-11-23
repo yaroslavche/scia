@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>db/fixtures/001_seed_data.sql</file>
+        <file>db/migrations/001_init.sql</file>
+    </qresource>
+</RCC>
