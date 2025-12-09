@@ -17,6 +17,8 @@ target_include_directories(${TARGET_NAME}
 target_compile_features(${TARGET_NAME} PUBLIC cxx_std_20)
 
 target_link_libraries(${TARGET_NAME}
+        PUBLIC
+        ${PROJECT_NAME}::Sqlite
         PRIVATE
         Qt6::Core
         Qt6::Quick

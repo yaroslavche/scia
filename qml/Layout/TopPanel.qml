@@ -25,6 +25,7 @@ Rectangle {
                 text: modelData.title
                 font.pointSize: 14
                 background: Rectangle {
+                    color: modelData.page === Router.currentRoute.page ? "lightblue" : "lightgrey"
                     radius: 8
                     border.color: "gray"
                     border.width: 1
